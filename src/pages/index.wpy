@@ -1,0 +1,52 @@
+<style lang="less">
+
+</style>
+<template>
+  <view>
+    <!-- 自定义 导航栏   可注释 -->
+    <inaver></inaver>
+    <view>hello world</view>
+    <i-toast id="toast" />
+  </view>
+</template>
+
+<script>
+  import wepy from 'wepy'
+  import inaver from '../components/common/inaver/inaver'
+  import { $Toast } from '../3rd-components/base/index'
+
+  export default class Index extends wepy.page {
+    config = {
+      usingComponents: {
+        // 使用绝对路径
+        "i-toast": "/3rd-components/toast/index"
+      }
+    }
+    
+    components = {
+      inaver
+    }
+
+
+    data = {
+      
+    }
+
+    computed = {
+      
+    }
+
+    methods = {
+    }
+
+    onLoad() {
+      $Toast({
+        content:'hello world'
+      })
+    }
+
+    onShareAppMessage() {
+      return this.$parent.onShareAppMessage()
+    }
+  }
+</script>

@@ -1,0 +1,70 @@
+<style lang="less">
+
+</style>
+
+<script>
+import wepy from 'wepy'
+import 'wepy-async-function'
+import { app } from './static'
+
+export default class extends wepy.app {
+  config = {
+    pages: [
+      'pages/index'
+    ],
+    // 后面可能会用到：分包
+    // subPackages:[
+    // {
+    //   "root": "dealer",
+    //   "pages":[
+    //     "pages/add",
+    //   ]
+    // }],
+    window: {
+      backgroundTextStyle: 'light',
+      navigationBarBackgroundColor: '#fff',
+      navigationBarTitleText: ' ',
+      // 取消原来官方导航栏
+      navigationStyle: 'custom',
+      navigationBarTextStyle: 'white'
+    }
+  }
+
+  globalData = {
+  }
+
+  constructor () {
+    super()
+    this.use('requestfix')
+    this.use('promisify')
+  }
+
+  onLaunch() {
+  }
+
+  sleep (s) {
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        resolve('promise resolved')
+      }, s * 1000)
+    })
+  }
+
+  onShareAppMessage(title,path='/pages/login',imageUrl) {
+    return {
+      title: title || app.share.title,
+      path: path,
+      imageUrl: imageUrl || app.share.imgUrl || "",
+      success: function(res) {
+        // 转发成功
+        console.log(res.errMsg)
+      },
+      fail: function(res) {
+        // 转发失败
+        console.log(res.errMsg)
+      }
+    }
+  }
+
+}
+</script>
